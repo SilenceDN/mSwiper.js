@@ -82,12 +82,16 @@
       this.queue.unshift(this.queue.pop());
       this.lock = 1;
       this.swap("right");
+      clearInterval(tasker)
+      this.isAutoPlay ? this.autoPlay() : '';
     } else if(offsetX >= 50) {
       // 向左
       // console.log("向左");
       this.queue.push(this.queue.shift());
       this.lock = 1;
       this.swap("left");
+      clearInterval(tasker)
+      this.isAutoPlay ? this.autoPlay() : '';
     }
   }
 
@@ -110,8 +114,9 @@
 
   }
 
+  var tasker=null;
   mSwiper.prototype.autoPlay = function autoPlay() {
-    setInterval(function() {
+    tasker = setInterval(function() {
       this.goDirection === 'left' 
         ? this.queue.push(this.queue.shift())
         : this.goDirection === 'right'
